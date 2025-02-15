@@ -25,19 +25,24 @@ export class Event {
      */
     constructor( nameOrEvent, extendedValues ) {
 
-        if ( typeof nameOrEvent !== 'string' ) {
+        if ( typeof nameOrEvent === 'object' ) {
 
             Object.assign( this,nameOrEvent );
-        
-        } else {
-
-            this.name = nameOrEvent ?? Event.PREFIX + "unnamed" + ( ++Event.nextId );
         
         }
         if ( extendedValues ) {
 
             Object.assign( this, extendedValues );
         
+        }
+        if ( typeof nameOrEvent === 'string' && nameOrEvent.length > 0 ) {
+
+            this.name = nameOrEvent;
+                
+        } else {
+
+             this.name = Event.PREFIX + "unnamed" + ( ++Event.nextId )
+
         }
     
     }
